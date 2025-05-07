@@ -8,11 +8,11 @@ Built with **React + TypeScript + Vite + Tailwind CSS**.
 
 ## ✨ Features
 
-- ✅ Create mood boards with tiles (images, quotes, color swatches, music embeds)
-- ✅ Edit and arrange tiles visually
-- ✅ View and share public board links
-- ✅ Responsive design for desktop & mobile
-- ✅ Minimal, clean, vibey UI 🌈
+✅ Create mood boards with tiles (images, quotes, color swatches, music embeds)
+✅ Edit and arrange tiles visually
+✅ View and share public board links
+✅ Responsive design for desktop & mobile
+✅ Minimal, clean, vibey UI 🌈
 
 ---
 

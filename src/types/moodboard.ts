@@ -6,7 +6,7 @@ export interface MoodTile {
   id: string;         // Unique identifier for the tile
   type: TileType;     // Type of content (image, quote, color, music)
   content: string;    // Content depends on type: URL for image/music, hex for color, text for quote
-  caption: string;
+  caption?: string;
 }
 
 // Define the structure of a mood board

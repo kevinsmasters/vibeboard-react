@@ -15,7 +15,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile, onSave }) => {
       return (
         <div className="rounded-xl overflow-hidden shadow-md transform transition-transform hover:scale-105">
           <img src={tile.content} alt="Mood image" className="w-full h-48 object-cover" />
-          "{tile.caption}"
+          {tile.caption && <p>"{tile.caption}"</p>}
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -37,7 +37,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile, onSave }) => {
       return (
         <div className="bg-white rounded-xl shadow-md p-4 text-center text-lg italic transform transition-transform hover:scale-105">
           “{tile.content}”<br />
-          "{tile.caption}"
+          {tile.caption && <p>"{tile.caption}"</p>}
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -60,7 +60,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile, onSave }) => {
         <div
           className="rounded-xl shadow-md w-full h-48 transform transition-transform hover:scale-105"
           style={{ backgroundColor: tile.content }}>
-          "{tile.caption}"
+          {tile.caption && <p>"{tile.caption}"</p>}
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -90,7 +90,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile, onSave }) => {
             allowFullScreen
             title="Music Embed"
           />
-          "{tile.caption}"
+          {tile.caption && <p>"{tile.caption}"</p>}
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -112,7 +112,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile, onSave }) => {
       return (
         <div className="bg-gray-200 rounded-xl shadow-md p-4 text-center transform transition-transform hover:scale-105">
           Unknown tile type
-          "{tile.caption}"
+          {tile.caption && <p>"{tile.caption}"</p>}
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"

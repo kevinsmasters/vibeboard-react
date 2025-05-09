@@ -4,9 +4,10 @@ import { TileEditModal } from "./TileEditModal";
 
 interface MoodTileProps {
   tile: MoodTileType;
+  onSave: (updatedTile: MoodTileType) => void;
 }
 
-const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
+const MoodTile: React.FC<MoodTileProps> = ({ tile, onSave }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   switch (tile.type) {
@@ -14,6 +15,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
       return (
         <div className="rounded-xl overflow-hidden shadow-md transform transition-transform hover:scale-105">
           <img src={tile.content} alt="Mood image" className="w-full h-48 object-cover" />
+          "{tile.caption}"
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -24,7 +26,8 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
             tile={tile}
             onSave={(updatedTile) => {
               console.log("Tile updated in parent!", updatedTile);
-              // TODO: update tile in board state
+              onSave(updatedTile); // bubble up!
+              setIsModalOpen(false);
             }}
           />
         </div>
@@ -33,7 +36,8 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
     case "quote":
       return (
         <div className="bg-white rounded-xl shadow-md p-4 text-center text-lg italic transform transition-transform hover:scale-105">
-          “{tile.content}”
+          “{tile.content}”<br />
+          "{tile.caption}"
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -44,7 +48,8 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
             tile={tile}
             onSave={(updatedTile) => {
               console.log("Tile updated in parent!", updatedTile);
-              // TODO: update tile in board state
+              onSave(updatedTile); // bubble up!
+              setIsModalOpen(false);
             }}
           />
         </div>
@@ -55,6 +60,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
         <div
           className="rounded-xl shadow-md w-full h-48 transform transition-transform hover:scale-105"
           style={{ backgroundColor: tile.content }}>
+          "{tile.caption}"
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -65,7 +71,8 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
             tile={tile}
             onSave={(updatedTile) => {
               console.log("Tile updated in parent!", updatedTile);
-              // TODO: update tile in board state
+              onSave(updatedTile); // bubble up!
+              setIsModalOpen(false);
             }}
           />
         </div>
@@ -83,6 +90,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
             allowFullScreen
             title="Music Embed"
           />
+          "{tile.caption}"
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -93,7 +101,8 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
             tile={tile}
             onSave={(updatedTile) => {
               console.log("Tile updated in parent!", updatedTile);
-              // TODO: update tile in board state
+              onSave(updatedTile); // bubble up!
+              setIsModalOpen(false);
             }}
           />
         </div>
@@ -103,6 +112,7 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
       return (
         <div className="bg-gray-200 rounded-xl shadow-md p-4 text-center transform transition-transform hover:scale-105">
           Unknown tile type
+          "{tile.caption}"
           <button
             onClick={() => setIsModalOpen(true)}
             className="absolute top-2 right-2 bg-white rounded-full p-1 shadow"
@@ -113,7 +123,8 @@ const MoodTile: React.FC<MoodTileProps> = ({ tile }) => {
             tile={tile}
             onSave={(updatedTile) => {
               console.log("Tile updated in parent!", updatedTile);
-              // TODO: update tile in board state
+              onSave(updatedTile); // bubble up!
+              setIsModalOpen(false);
             }}
           />
         </div>

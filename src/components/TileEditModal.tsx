@@ -16,9 +16,10 @@ export const TileEditModal: React.FC<TileEditModalProps> = ({
   onSave,
 }) => {
   const [caption, setCaption] = useState(tile.caption ?? "");
+  const [content, setContent] = useState(tile.content ?? "");
 
   const handleSave = () => {
-    const updatedTile = { ...tile, caption };
+    const updatedTile = { ...tile, caption, content };
     console.log("Saving tile:", updatedTile);
     onSave(updatedTile);
     onClose();
@@ -35,6 +36,15 @@ export const TileEditModal: React.FC<TileEditModalProps> = ({
             <DialogTitle as="h3" className="text-base/7 font-medium text-white">
               Edit Tile
             </DialogTitle>
+            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-700">
+              Content
+            </label>
+            <input
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-400"
+            />
             <label className="block mb-2 text-sm font-medium text-gray-700">
               Caption
             </label>

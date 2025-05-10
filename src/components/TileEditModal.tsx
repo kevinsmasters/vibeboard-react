@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react"; // or use any modal lib
-import type { MoodTile } from "../types/moodboard"; // assuming you already have this type
-
+import type { TileType, MoodTile } from "../types/moodboard"; // assuming you already have this type
+import { TILE_TYPES } from "../types/moodboard";
 interface TileEditModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -17,9 +17,10 @@ export const TileEditModal: React.FC<TileEditModalProps> = ({
 }) => {
   const [caption, setCaption] = useState(tile.caption ?? "");
   const [content, setContent] = useState(tile.content ?? "");
+  const [type, setType] = useState(tile.type ?? "");
 
   const handleSave = () => {
-    const updatedTile = { ...tile, caption, content };
+    const updatedTile = { ...tile, caption, content, type };
     console.log("Saving tile:", updatedTile);
     onSave(updatedTile);
     onClose();
@@ -36,7 +37,21 @@ export const TileEditModal: React.FC<TileEditModalProps> = ({
             <DialogTitle as="h3" className="text-base/7 font-medium text-white">
               Edit Tile
             </DialogTitle>
-            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-700">
+            <label className="block mb-2 text-sm font-medium text-gray-700">
+              Type
+            </label>
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value as TileType)}
+              className="border rounded px-2 py-1 w-full"
+            >
+              {TILE_TYPES.map((option) => (
+                <option key={option} value={option}>
+                  {option.charAt(0).toUpperCase() + option.slice(1)}
+                </option>
+              ))}
+            </select>
+            <label className="block mb-2 text-sm font-medium text-gray-700">
               Content
             </label>
             <input

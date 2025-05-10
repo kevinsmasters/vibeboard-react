@@ -1,5 +1,6 @@
 // Define allowed tile types
 export type TileType = "image" | "quote" | "color" | "music";
+export const TILE_TYPES: TileType[] = ["image", "quote", "color", "music"];
 
 // Define the structure of a single tile
 export interface MoodTile {

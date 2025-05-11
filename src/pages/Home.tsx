@@ -5,16 +5,15 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  type DragEndEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
-  useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import MoodTile from "../components/MoodTile";
 import type { MoodTile as MoodTileType } from "../types/moodboard";
+import { SortableTile } from "../components/SortableTile";
 
 const sampleTiles: MoodTileType[] = [
   { id: "1", type: "image", content: "https://placecats.com/400/300" },
@@ -60,11 +59,7 @@ const Home: React.FC = () => {
       <SortableContext items={tiles.map((tile) => tile.id)} strategy={verticalListSortingStrategy}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
           {tiles.map(tile => (
-            <MoodTile
-              key={tile.id}
-              tile={tile}
-              onSave={handleUpdateTile}
-            />
+            <SortableTile key={tile.id} tile={tile} onSave={handleUpdateTile} />
           ))}
         </div>
       </SortableContext>

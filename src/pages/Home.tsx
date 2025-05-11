@@ -1,4 +1,18 @@
 import { useState } from "react";
+import {
+  DndContext,
+  closestCenter,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import MoodTile from "../components/MoodTile";
 import type { MoodTile as MoodTileType } from "../types/moodboard";
 
@@ -17,6 +31,21 @@ const sampleTiles: MoodTileType[] = [
 const Home: React.FC = () => {
   const [tiles, setTiles] = useState<MoodTileType[]>(sampleTiles);
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 5 },
+    })
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (active.id !== over?.id) {
+      const oldIndex = tiles.findIndex((t) => t.id === active.id);
+      const newIndex = tiles.findIndex((t) => t.id === over?.id);
+      setTiles((tiles) => arrayMove(tiles, oldIndex, newIndex));
+    }
+  };
+
   const handleUpdateTile = (updatedTile: MoodTileType) => {
     setTiles((prevTiles) =>
       prevTiles.map((tile) =>
@@ -27,15 +56,19 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-      {tiles.map(tile => (
-        <MoodTile
-          key={tile.id}
-          tile={tile}
-          onSave={handleUpdateTile}
-        />
-      ))}
-    </div>
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={tiles.map((tile) => tile.id)} strategy={verticalListSortingStrategy}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+          {tiles.map(tile => (
+            <MoodTile
+              key={tile.id}
+              tile={tile}
+              onSave={handleUpdateTile}
+            />
+          ))}
+        </div>
+      </SortableContext>
+    </DndContext>
   )
 };
 

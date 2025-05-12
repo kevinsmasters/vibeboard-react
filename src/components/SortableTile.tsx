@@ -24,7 +24,7 @@ export const SortableTile: React.FC<MoodTileProps> = ({ tile, onSave }) => {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}  data-testid="mood-tile">
       <MoodTile tile={tile} onSave={onSave} />
     </div>
   );

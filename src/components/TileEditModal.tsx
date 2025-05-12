@@ -60,10 +60,11 @@ export const TileEditModal: React.FC<TileEditModalProps> = ({
               onChange={(e) => setContent(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:border-blue-400"
             />
-            <label className="block mb-2 text-sm font-medium text-gray-700">
+            <label htmlFor="caption" className="block mb-2 text-sm font-medium text-gray-700">
               Caption
             </label>
             <input
+              id="caption"
               type="text"
               value={caption}
               onChange={(e) => setCaption(e.target.value)}

@@ -1,4 +1,5 @@
 // TileEditModal.test.tsx
+import { test, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from "@testing-library/react";
 import { TileEditModal } from "./TileEditModal";
 import type { MoodTile } from "../types/moodboard";
@@ -14,17 +15,17 @@ test("renders caption input with initial value", () => {
   render(
     <TileEditModal
       isOpen={true}
-      onClose={jest.fn()}
+      onClose={vi.fn()}
       tile={mockTile}
-      onSave={jest.fn()}
+      onSave={vi.fn()}
     />
   );
   expect(screen.getByDisplayValue(/Initial caption/i)).toBeInTheDocument();
 });
 
 test("calls onSave with updated caption", () => {
-  const mockSave = jest.fn();
-  const mockClose = jest.fn();
+  const mockSave = vi.fn();
+  const mockClose = vi.fn();
 
   render(
     <TileEditModal

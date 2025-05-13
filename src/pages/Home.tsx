@@ -54,15 +54,20 @@ const Home: React.FC = () => {
   };
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={tiles.map((tile) => tile.id)} strategy={verticalListSortingStrategy}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-          {tiles.map(tile => (
-            <SortableTile key={tile.id} tile={tile} onSave={handleUpdateTile} />
-          ))}
-        </div>
-      </SortableContext>
-    </DndContext>
+    <>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={tiles.map((tile) => tile.id)} strategy={verticalListSortingStrategy}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+            {tiles.map(tile => (
+              <SortableTile key={tile.id} tile={tile} onSave={handleUpdateTile} />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
+      <button onClick={() => localStorage.removeItem(STORAGE_KEY)}>
+        Reset Moodboard
+      </button>
+    </>
   )
 };
 

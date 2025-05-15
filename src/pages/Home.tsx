@@ -15,6 +15,7 @@ import {
 import type { MoodTile as MoodTileType } from "../types/moodboard";
 import { defaultTiles } from "../data/defaultTiles"; // fallback seed tiles
 import { SortableTile } from "../components/SortableTile";
+import { TileStorage } from "../data/tileStorage";
 
 const Home: React.FC = () => {
   const STORAGE_KEY = "vibeboard-tiles";
@@ -26,7 +27,11 @@ const Home: React.FC = () => {
   })
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(tiles));
+    TileStorage.getTiles().then(setTiles);
+  }, []);
+
+  useEffect(() => {
+    TileStorage.saveTiles(tiles);
   }, [tiles]);
 
   const sensors = useSensors(
